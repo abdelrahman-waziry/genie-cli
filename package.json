@@ -4,11 +4,21 @@
   "description": "A powerful command-line interface for automating common development tasks, such as generating new projects, creating modules, and scaffolding components with ease.",
   "main": "index.js",
   "bin": {
-    "genie": "./bin/genie.js"
+    "genie": "./index.js"
   },
   "scripts": {
-    "start": "node ./bin/genie.js",
+    "start": "node ./index.js",
     "test": "echo \"No tests yet\""
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "commander": "^4.1.0",
+    "inquirer": "^7.0.3",
+    "ncp": "^2.0.0",
+    "node-cmd": "^5.0.0",
+    "ora": "^4.0.3",
+    "shelljs": "^0.8.3"
   },
   "keywords": [
     "cli",
@@ -20,13 +30,6 @@
   ],
   "author": "Your Name",
   "license": "MIT",
-  "dependencies": {
-    "inquirer": "^8.0.0",
-    "commander": "^9.0.0"
-  },
-  "devDependencies": {
-    "chalk": "^4.1.2"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/abdelrahman-waziry/genie-cli.git"
