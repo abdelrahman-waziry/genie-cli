@@ -1,0 +1,38 @@
+{
+  "name": "genie-cli",
+  "version": "1.0.0",
+  "description": "A powerful command-line interface for automating common development tasks, such as generating new projects, creating modules, and scaffolding components with ease.",
+  "main": "index.js",
+  "bin": {
+    "genie": "./bin/genie.js"
+  },
+  "scripts": {
+    "start": "node ./bin/genie.js",
+    "test": "echo \"No tests yet\""
+  },
+  "keywords": [
+    "cli",
+    "automation",
+    "generator",
+    "project",
+    "module",
+    "component"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "inquirer": "^8.0.0",
+    "commander": "^9.0.0"
+  },
+  "devDependencies": {
+    "chalk": "^4.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/genie-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/genie-cli/issues"
+  },
+  "homepage": "https://github.com/yourusername/genie-cli#readme"
+}
