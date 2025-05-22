@@ -7,7 +7,7 @@ A powerful command-line interface for automating common development tasks, such 
 To install **Genie CLI** globally, run the following command:
 
 ```bash
-npm install -g genie-cli
+npm install -g genie-utils-cli --save
 ```
 
 ## Available Commands
