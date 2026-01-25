@@ -1,6 +1,6 @@
 {
   "name": "genie-utils-cli",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "A powerful command-line interface for automating common development tasks, such as generating new projects, creating modules, and scaffolding components with ease.",
   "main": "index.js",
   "bin": {
@@ -9,6 +9,17 @@
   "scripts": {
     "start": "node ./index.js",
     "test": "echo \"No tests yet\""
+  },
+  "files": [
+    "index.js",
+    "lib/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "preferGlobal": true,
+  "engines": {
+    "node": ">=10.0.0"
   },
   "bundleDependencies": false,
   "dependencies": {
@@ -26,7 +37,16 @@
     "generator",
     "project",
     "module",
-    "component"
+    "component",
+    "scaffold",
+    "scaffolding",
+    "boilerplate",
+    "code-generator",
+    "development-tools",
+    "productivity",
+    "workflow",
+    "genie",
+    "genie-cli"
   ],
   "author": "Abdelrahman Waziry",
   "license": "MIT",

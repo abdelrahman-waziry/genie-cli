@@ -1,0 +1,30 @@
+# Development files
+.git
+.gitignore
+.vscode
+.idea
+*.log
+npm-debug.log*
+
+# Test files
+test/
+tests/
+*.test.js
+*.spec.js
+
+# Documentation that's not needed in package
+docs/
+examples/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# Temporary files
+tmp/
+temp/
