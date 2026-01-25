@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2026-01-25
+
+### Added
+- **Composable Architecture** - Component-first design for true plug-and-play
+- `src/composables/` folder for reusable composition functions
+- `src/router/` folder with Vue Router 4 configuration
+- Example composable (`useCounter`) demonstrating composition patterns
+- Example Pinia store with Composition API
+- Home view with project information
+- Index files for clean component imports
+- Co-located test files with components
+- Vitest configuration for testing
+
+### Changed
+- **BREAKING**: Project structure now focuses on composability
+- `create-component` now creates components with index.js and co-located tests
+- `create-module` intelligently creates composables (if name starts with 'use') or Pinia stores
+- `create-test` supports both co-located and standalone tests
+- Components are now truly plug-and-play with clean imports
+
+### Improved
+- Better component organization for reusability
+- Cleaner imports using index files: `import Button from '@/components/Button'`
+- Tests co-located with components for better maintainability
+- Example implementations to guide development
+- Enhanced README with composable architecture documentation
+
 ## [1.0.3] - 2026-01-25
 
 ### Changed

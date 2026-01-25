@@ -42,24 +42,26 @@ $ genie init my-app
 
 ---
 
-### 📦 `create-module` | `cm`
-Generate a new module for your application.
+### 📦 `create-store` | `cs`
+Generate a new Pinia store or composable for your application.
 
 ```bash
-genie create-module <name> [options]
+genie create-store <name>
 ```
 
-**Options:**
-- `-s, --standalone` - Creates a loader to allow extracting module
-- `-h, --help` - Show usage information
+**Behavior:**
+- If name starts with `use` (e.g., `useAuth`), creates a composable in `src/composables/`
+- Otherwise, creates a Pinia store in `src/stores/`
 
 **Examples:**
 ```bash
-# Create a standard module
-genie create-module UserManagement
+# Create a Pinia store
+genie create-store User
+# Creates: src/stores/UserStore.js
 
-# Create a standalone module
-genie cm PaymentModule --standalone
+# Create a composable
+genie cs useAuth
+# Creates: src/composables/useAuth.js
 ```
 
 ---

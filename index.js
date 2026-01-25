@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 const program = require('commander')
-const {createComponent} = require('./lib/commands/create-component')
-const createModule = require('./lib/commands/create-module')
+const { createComponent } = require('./lib/commands/create-component')
+const createStore = require('./lib/commands/create-store')
 const createTest = require('./lib/commands/create-test')
 const init = require('./lib/commands/init')
 const extract = require('./lib/commands/extract')
@@ -15,62 +15,61 @@ function version() {
 }
 
 program.command('version')
-        .alias('v')
-        .description('Displays genie-cli version')
-        .action(() => {
-          version()
-        })
-        
-program.command('create-component <name>')
-        .alias('cr')
-        .option('-v, --view', 'Creates a new view')
-        .option('-g, --global', 'Creates a global component')
-        .option('-s, --standalone', 'Creates a loader to allow extracting component')
-        .description('Creates a new component')
-        .action((name, args) => {
-          createComponent(name, args.view, args.standalone, args.global)
-        })
+  .alias('v')
+  .description('Displays genie-cli version')
+  .action(() => {
+    version()
+  })
 
-program.command('create-module <name>')
-        .alias('cm')
-        .option('-s, --standalone', 'Creates a loader to allow extracting module')
-        .description('Creates a new module')
-        .action((name, args) => {
-          createModule(name, args.standalone)
-        })
+program.command('create-component <name>')
+  .alias('cr')
+  .option('-v, --view', 'Creates a new view')
+  .option('-g, --global', 'Creates a global component')
+  .option('-s, --standalone', 'Creates a loader to allow extracting component')
+  .description('Creates a new component')
+  .action((name, args) => {
+    createComponent(name, args.view, args.standalone, args.global)
+  })
+
+program.command('create-store <name>')
+  .alias('cs')
+  .description('Creates a new Pinia store or composable (if name starts with "use")')
+  .action((name) => {
+    createStore(name)
+  })
 
 program.command('create-test <name>')
-        .alias('ct')
-        .description('Creates a new test case')
-        .action((name) => {
-          createTest(name)
-        })
+  .alias('ct')
+  .description('Creates a new test case')
+  .action((name) => {
+    createTest(name)
+  })
 
 program.command('init <name>')
-        .alias('i')
-        .description('Initializes a new project')
-        .action((name) => {
-          init(name)
-        })
+  .alias('i')
+  .description('Initializes a new project')
+  .action((name) => {
+    init(name)
+  })
 
 program.command('add-config')
-        .alias('ac')
-        .description('Adds rollup configs to root directory')
-        .action(() => {
-          addConfig()
-        })
+  .alias('ac')
+  .description('Adds rollup configs to root directory')
+  .action(() => {
+    addConfig()
+  })
 
 program.command('extract-module')
-        .alias('ext')
-        .description('Extracts a module')
-        .action(() => {
-          extract()
-        })
+  .alias('ext')
+  .description('Extracts a module')
+  .action(() => {
+    extract()
+  })
 
 program.command('add-linting')
-       .alias('lint')
-       .description('Adds a set of eslint rules to an exisitng project')
-       .action(() => {
-          addLint()
-       })
+  .alias('lint')
+  .description('Adds a set of eslint rules to an exisitng project')
+  .action(() => {
+    addLint()
+  })
 program.parse(process.argv);
