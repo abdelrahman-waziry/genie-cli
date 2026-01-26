@@ -5,7 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-01-25
+
+### Added
+- **React Support** - Full React framework support alongside Vue
+- Framework selection during project initialization
+- React project template with Vite, React Router, and Zustand
+- React component generation with CSS Modules
+- React custom hooks generation
+- Zustand store generation for React state management
+- Automatic framework detection in existing projects
+- React-specific stubs (component, hook, store, test, styles)
+- Framework detector utility
+
+### Changed
+- **BREAKING**: `init` command now prompts for framework selection (Vue 3 or React)
+- **BREAKING**: Stubs reorganized into framework-specific folders (`lib/stubs/vue/` and `lib/stubs/react/`)
+- `create-component` now detects framework and creates appropriate component type
+- `create-store` now creates hooks for React or composables for Vue
+- Commands auto-detect framework from package.json dependencies
+
+### Improved
+- Better project organization with framework-specific templates
+- Consistent composable architecture across both frameworks
+- Enhanced documentation with React examples
+- Clearer command output with framework-specific guidance
+
 ## [1.1.1] - 2026-01-25
+
+### Changed
+- Renamed `create-module` to `create-store` for clarity
+
+## [1.1.0] - 2026-01-25
 
 ### Added
 - **Composable Architecture** - Component-first design for true plug-and-play
