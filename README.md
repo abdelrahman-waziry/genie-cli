@@ -4,203 +4,537 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js Version](https://img.shields.io/node/v/genie-utils-cli.svg)](https://nodejs.org)
 
-A powerful command-line interface for automating common development tasks, such as generating new projects, creating modules, and scaffolding components with ease.
+A powerful, framework-agnostic CLI for automating development tasks and scaffolding modern web applications.
 
-**Genie CLI** streamlines your workflow by automating repetitive tasks like generating components, modules, and entire projects. Whether you're starting a new project or adding reusable components, Genie makes it fast and easy.
+**Genie CLI** streamlines your workflow by automating repetitive tasks like generating components, stores, and entire projects. Now supporting **both Vue 3 and React** with a composable, plug-and-play architecture!
+
+## ✨ Features
+
+- 🎯 **Multi-Framework Support** - Vue 3 and React
+- 🔌 **Plug-and-Play Components** - Self-contained with tests and clean imports
+- 🪝 **Composable Architecture** - Hooks/Composables for reusable logic
+- 🧪 **Built-in Testing** - Vitest integration with co-located tests
+- 🎨 **Modern Styling** - SCSS with organized architecture (Vue) / CSS Modules (React)
+- 📦 **Smart State Management** - Pinia for Vue, Zustand for React
+- 🚀 **Fast Setup** - Production-ready projects in seconds
 
 ## 🚀 Installation
 
-To install **Genie CLI** globally, run the following command:
+Install **Genie CLI** globally:
 
 ```bash
 npm install -g genie-utils-cli
 ```
 
-Verify the installation:
+Verify installation:
 
 ```bash
-genie --version
+genie version
+# or
+genie -v
 ```
+
+## 🎯 Quick Start
+
+### Create a New Project
+
+```bash
+# Initialize new project
+genie init my-awesome-app
+
+# Choose your framework
+? Select framework › 
+❯ Vue 3
+  React
+
+# Project ready!
+cd my-awesome-app
+npm run dev
+```
+
+### Create Components
+
+```bash
+# Create a component (auto-detects framework)
+genie create-component Button
+
+# Create a view/page
+genie create-component HomePage --view
+
+# Creates proper structure with tests and exports!
+```
+
+### Create Stores or Hooks
+
+```bash
+# Vue: Create a composable
+genie create-store useAuth
+
+# Vue: Create Pinia store
+genie create-store User
+
+# React: Create custom hook
+genie create-store useAuth
+
+# React: Create Zustand store
+genie create-store Cart
+```
+
+---
 
 ## 📖 Available Commands
 
 ### 🚀 `init` | `i`
-Initialize a new project with a basic setup.
+
+Initialize a new Vue or React project with a composable architecture.
 
 ```bash
-genie init my-awesome-project
+genie init <project-name>
 ```
 
-This command creates a new project directory with the necessary files and structure to get you started quickly.
+**What you get:**
+- Framework selection (Vue 3 or React)
+- Project type selection (SPA or CMS-integrated)
+- Complete project structure
+- Pre-configured build tools (Vite)
+- Router setup (Vue Router / React Router)
+- State management (Pinia / Zustand)
+- Testing setup (Vitest)
+- Example components and structures
 
 **Example:**
+
 ```bash
-$ genie init my-app
-✨ Initializing project: my-app
-✅ Project created successfully!
+genie init my-app
+```
+
+**Vue Project Structure:**
+```
+my-app/
+├── src/
+│   ├── components/       # Reusable components
+│   ├── views/            # Page components
+│   ├── composables/      # Vue composables
+│   ├── stores/           # Pinia stores
+│   ├── router/           # Vue Router
+│   ├── utils/            # Utilities
+│   └── assets/sass/      # SCSS styles
+```
+
+**React Project Structure:**
+```
+my-app/
+├── src/
+│   ├── components/       # Reusable components
+│   ├── pages/            # Page components
+│   ├── hooks/            # Custom React hooks
+│   ├── store/            # Zustand stores
+│   ├── utils/            # Utilities
+│   └── styles/           # SCSS/CSS Modules
 ```
 
 ---
 
 ### 📦 `create-store` | `cs`
-Generate a new Pinia store or composable for your application.
+
+Generate stores or composables/hooks based on your framework and naming convention.
 
 ```bash
 genie create-store <name>
 ```
 
-**Behavior:**
-- If name starts with `use` (e.g., `useAuth`), creates a composable in `src/composables/`
-- Otherwise, creates a Pinia store in `src/stores/`
+**Smart Behavior:**
+
+**Vue Projects:**
+- Name starts with `use` → Creates composable in `src/composables/`
+- Other names → Creates Pinia store in `src/stores/`
+
+**React Projects:**
+- Name starts with `use` → Creates custom hook in `src/hooks/`
+- Other names → Creates Zustand store in `src/store/`
 
 **Examples:**
-```bash
-# Create a Pinia store
-genie create-store User
-# Creates: src/stores/UserStore.js
 
-# Create a composable
-genie cs useAuth
-# Creates: src/composables/useAuth.js
+```bash
+# Vue - Create composable
+genie create-store useAuth
+# → src/composables/useAuth.js
+
+# Vue - Create Pinia store
+genie cs User
+# → src/stores/UserStore.js
+
+# React - Create custom hook
+genie create-store useFetch
+# → src/hooks/useFetch.js
+
+# React - Create Zustand store
+genie cs Cart
+# → src/store/cartStore.js
 ```
 
 ---
 
 ### 🛠️ `create-component` | `cr`
-Scaffold a new component for your project.
+
+Scaffold components with automatic framework detection.
 
 ```bash
 genie create-component <name> [options]
 ```
 
 **Options:**
-- `-v, --view` - Creates a new view component
-- `-g, --global` - Create a global component
-- `-s, --standalone` - Generates a standalone component (with loader for extraction)
-- `-h, --help` - Show usage information
+- `-v, --view` - Creates a view (Vue) or page (React) component
+- `-g, --global` - Creates a global component
+- `-s, --standalone` - Generates standalone component with loader
+
+**Component Structure:**
+
+**Vue:**
+```
+src/components/Button/
+├── Button.vue           # Component
+├── Button.spec.js       # Test
+└── index.js             # Export
+```
+
+**React:**
+```
+src/components/Button/
+├── Button.jsx           # Component
+├── Button.module.scss   # Scoped styles
+├── Button.test.jsx      # Test
+└── index.js             # Export
+```
 
 **Examples:**
+
 ```bash
-# Create a standard component
+# Create component
 genie create-component Button
 
-# Create a view component
+# Create view/page
 genie cr HomePage --view
 
-# Create a global standalone component
-genie cr Navigation --global --standalone
+# Create global component
+genie cr Navigation --global
+```
+
+**Clean Imports:**
+```javascript
+// Instead of this:
+import Button from './components/Button/Button.vue'
+
+// You get this:
+import Button from '@/components/Button'
 ```
 
 ---
 
 ### 🧪 `create-test` | `ct`
-Generate a new test case for your components or modules.
+
+Generate test files for your components.
 
 ```bash
 genie create-test <name>
 ```
 
-**Example:**
+**Features:**
+- Framework-aware (Vitest + Testing Library)
+- Co-located with components
+- Or standalone in `tests/` folder
+
+**Examples:**
+
 ```bash
-genie create-test UserService
+# Interactive mode
+genie create-test UserCard
+
+# Choose:
+# - Component test (co-located)
+# - Standalone test (in tests/)
 ```
 
 ---
 
-### ⚙️ `add-config` | `ac`
-Add Rollup configuration files to your project's root directory.
+### 🔧 `add-config` | `ac`
+
+Add Rollup configuration files to your project.
 
 ```bash
 genie add-config
 ```
 
-This command sets up build configurations for bundling your modules.
-
 ---
 
-### 📤 `extract-module` | `ext`
-Extract a module from your project for reuse in other projects.
+### 📝 `add-linting` | `lint`
 
-```bash
-genie extract-module
-```
-
-This interactive command guides you through extracting a standalone module.
-
----
-
-### 🔍 `add-linting` | `lint`
-Add a set of ESLint rules to an existing project.
+Add ESLint configuration to an existing project.
 
 ```bash
 genie add-linting
 ```
 
-Quickly set up code quality tools with predefined ESLint configurations.
+---
+
+### 📤 `extract-module` | `ext`
+
+Extract a module for distribution.
+
+```bash
+genie extract-module
+```
 
 ---
 
-### 🔢 `version` | `v`
-Display the current version of **Genie CLI**.
+## 🎨 Framework-Specific Features
 
-```bash
-genie version
+### Vue 3 Features
+
+- ✅ **Composition API** - Modern Vue development
+- ✅ **Pinia** - Intuitive state management
+- ✅ **Vue Router 4** - Client-side routing
+- ✅ **SCSS** - Organized 7-1 architecture
+- ✅ **Composables** - Reusable composition functions
+
+**Example Composable:**
+```javascript
+// src/composables/useCounter.js
+import { ref, computed } from 'vue'
+
+export function useCounter(initialValue = 0) {
+  const count = ref(initialValue)
+  const doubleCount = computed(() => count.value * 2)
+  
+  function increment() {
+    count.value++
+  }
+  
+  return { count, doubleCount, increment }
+}
 ```
 
-## ✨ Features
+### React Features
 
-- **⚡ Fast Scaffolding**: Quickly generate projects, modules, and components
-- **🎯 Modular Design**: Add only the components or modules you need
-- **📦 Standalone Support**: Create standalone components or modules for easier extraction and reusability
-- **🔧 Flexible Configuration**: Customize your workflow with various command options
-- **🎨 Interactive CLI**: Beautiful, user-friendly command-line interface with progress indicators
+- ✅ **React 18** - Latest React with concurrent features
+- ✅ **Zustand** - Simple, flexible state management
+- ✅ **React Router 6** - Declarative routing
+- ✅ **CSS Modules** - Scoped component styling
+- ✅ **Custom Hooks** - Reusable stateful logic
 
-## 🎯 Why Genie CLI?
+**Example Hook:**
+```javascript
+// src/hooks/useCounter.js
+import { useState, useCallback } from 'react'
 
-Traditional project setup and component generation can be time-consuming and repetitive. **Genie CLI** eliminates this friction by:
+export function useCounter(initialValue = 0) {
+  const [count, setCount] = useState(initialValue)
+  
+  const increment = useCallback(() => {
+    setCount(c => c + 1)
+  }, [])
+  
+  return { count, increment }
+}
+```
 
-- **Saving Time**: Automate boilerplate code generation
-- **Ensuring Consistency**: Maintain consistent project structure across your codebase
-- **Boosting Productivity**: Focus on building features, not setting up files
-- **Reducing Errors**: Use tested templates instead of manual file creation
+---
 
-## 🔮 Roadmap
+## 🔍 Framework Auto-Detection
 
-### 🚧 Coming Soon!
+Genie CLI automatically detects your project's framework by checking `package.json` dependencies:
 
-We're actively working on expanding **Genie CLI** with support for multiple frameworks:
+- Has `vue` → Vue project
+- Has `react` → React project
+- Neither → Prompts for framework choice
 
-- ⚛️ React templates and components
-- 🅰️ Angular modules and services
-- 💚 Vue.js components and composables
-- 🎭 Svelte components
-- 📱 React Native components
+This means commands like `create-component` and `create-store` automatically generate the correct file types!
 
-Stay tuned for updates!
+---
+
+## 💡 Examples
+
+### Complete Vue Project Setup
+
+```bash
+# 1. Create project
+genie init my-vue-app
+
+# 2. Select Vue 3
+# 3. Select SPA
+
+cd my-vue-app
+npm run dev
+
+# 4. Create components
+genie create-component Button
+genie create-component UserCard
+
+# 5. Create composables
+genie create-store useAuth
+genie create-store useFetch
+
+# 6. Create Pinia stores
+genie create-store User
+genie create-store Products
+
+# 7. Run tests
+npm test
+```
+
+### Complete React Project Setup
+
+```bash
+# 1. Create project
+genie init my-react-app
+
+# 2. Select React
+# 3. Select SPA
+
+cd my-react-app
+npm run dev
+
+# 4. Create components
+genie create-component Button
+genie create-component UserCard
+
+# 5. Create custom hooks
+genie create-store useAuth
+genie create-store useFetch
+
+# 6. Create Zustand stores
+genie create-store User
+genie create-store Cart
+
+# 7. Run tests
+npm test
+```
+
+---
+
+## 🏗️ Project Architecture
+
+### Composable, Plug-and-Play Philosophy
+
+Every component is **self-contained** and **easy to reuse**:
+
+```
+Component/
+├── Component.vue/.jsx    # Implementation
+├── Component.spec.js     # Tests
+├── Component.module.scss # Styles (React only)
+└── index.js              # Clean export
+```
+
+**Benefits:**
+- **Portable** - Copy/paste components between projects
+- **Testable** - Tests live next to components
+- **Maintainable** - Everything in one place
+- **Clean imports** - No deep path hell
+
+---
+
+## 🛠️ Configuration
+
+### Vite Configuration
+
+All projects come pre-configured with:
+- **Path aliases**: `@/` points to `src/`
+- **CSS preprocessing**: SCSS support
+- **Testing**: Vitest integration
+- **Framework plugins**: Vue or React
+
+### Supported Node Versions
+
+- Node.js >= 10.0.0
+
+---
+
+## 📚 Documentation
+
+### Command Reference
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `init` | `i` | Initialize new project |
+| `create-component` | `cr` | Create component |
+| `create-store` | `cs` | Create store/hook |
+| `create-test` | `ct` | Create test file |
+| `add-config` | `ac` | Add Rollup config |
+| `add-linting` | `lint` | Add ESLint config |
+| `extract-module` | `ext` | Extract module |
+| `version` | `v` | Show version |
+
+### Framework Support
+
+| Framework | Version | Status |
+|-----------|---------|--------|
+| Vue 3 | ^3.3.4 | ✅ Fully Supported |
+| React | ^18.2.0 | ✅ Fully Supported |
+| Svelte | - | 🔜 Coming Soon |
+| Angular | - | 🔜 Planned |
+
+---
 
 ## 🤝 Contributing
 
-We welcome contributions from the community! Please read our [Contributing Guidelines](./CONTRIBUTING.md) to get started.
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
-## 📝 Changelog
+### Development Setup
 
-See [CHANGELOG.md](./CHANGELOG.md) for a detailed history of changes.
+```bash
+# Clone the repo
+git clone https://github.com/abdelrahman-waziry/genie-cli.git
+cd genie-cli
 
-## 🐛 Issues & Support
+# Install dependencies
+npm install
 
-Found a bug or have a feature request? Please [open an issue](https://github.com/abdelrahman-waziry/genie-cli/issues) on GitHub.
+# Link locally for testing
+npm link
 
-## 📄 License
-
-MIT License. See [LICENSE](./LICENSE) for details.
-
-## 👨‍💻 Author
-
-**Abdelrahman Waziry**
-
-- GitHub: [@abdelrahman-waziry](https://github.com/abdelrahman-waziry)
+# Test your changes
+genie init test-project
+```
 
 ---
 
-Made with ❤️ by developers, for developers.
+## 📝 Changelog
 
+See [CHANGELOG.md](CHANGELOG.md) for a list of changes.
+
+---
+
+## 📄 License
+
+MIT © [Abdelrahman Waziry](https://github.com/abdelrahman-waziry)
+
+---
+
+## 🙏 Acknowledgments
+
+Built with:
+- [Inquirer](https://github.com/SBoudrias/Inquirer.js) - Interactive CLI
+- [Chalk](https://github.com/chalk/chalk) - Terminal styling
+- [Ora](https://github.com/sindresorhus/ora) - Loading spinners
+- [Commander](https://github.com/tj/commander.js) - CLI framework
+
+---
+
+## 🔗 Links
+
+- [npm Package](https://www.npmjs.com/package/genie-utils-cli)
+- [GitHub Repository](https://github.com/abdelrahman-waziry/genie-cli)
+- [Issue Tracker](https://github.com/abdelrahman-waziry/genie-cli/issues)
+
+---
+
+## ⭐ Support
+
+If you find Genie CLI helpful, please consider:
+- ⭐ Starring the repo
+- 🐛 Reporting bugs
+- 💡 Suggesting features
+- 🤝 Contributing code
+
+---
