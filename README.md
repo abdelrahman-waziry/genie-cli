@@ -507,7 +507,7 @@ See [CHANGELOG.md](CHANGELOG.md) for a list of changes.
 
 ## 📄 License
 
-MIT © [Abdelrahman Waziry](https://github.com/abdelrahman-waziry)
+MIT © [Abdelrahman Mohsen](https://github.com/abdelrahman-waziry)
 
 ---
 
