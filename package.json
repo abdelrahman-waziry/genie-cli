@@ -1,6 +1,6 @@
 {
   "name": "genie-utils-cli",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A powerful command-line interface for automating common development tasks, such as generating new projects, creating modules, and scaffolding components with ease.",
   "main": "index.js",
   "bin": {
